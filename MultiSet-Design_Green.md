@@ -96,3 +96,31 @@ Feature: craftRecipe() — consumes ingredients to create a new item
     - Player tools/item flexibility: Players can decide what resources to find or save to make their own crafted item. It helps player engagement.
     - Crafting an item makes the MultiSet into a part of the player’s progression and activity
     - The design could later promote extensibility, like more dynamic recipes, recipe discovery systems, etc.
+ 
+## UML Diagram
+
+```mermaid
+classDiagram
+class MultiSet {
+    - HashTable items
+    - useItems(recipe : Recipe) void
+    - hasRequiredItems(recipe : Recipe) bool
+    + insertItem(item : string, qty : int) void
+    + removeItem(item : string, qty : int) void
+    + getCount(item : string) int
+    + peek() List
+    + union_with(other : MultiSet) MultiSet
+    + intersection_with(other : MultiSet) MultiSet
+    + craftRecipe(recipe : Recipe) bool
+}
+
+class Recipe {
+    - HashTable ingredients
+    - craftedItem : string
+    + getIngredients() HashTable
+    + getCraftedItem() string
+}
+```
+
+
+
