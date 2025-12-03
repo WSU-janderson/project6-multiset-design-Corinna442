@@ -126,12 +126,12 @@ class Recipe {
 ### Alternative: AVLTree
 I chose the HashTable data structure for my MultiSet because it uses fast average time complexity operations like insertion, deletion, look-up, and count. Constant time average performance is more important to an inventory-based game than the exact ordering of items within the inventory. Thus, I decided not to use the AVLTree because its advantages of keeping items sorted and in order are not supported in my gameplay. Balancing nodes in an AVLTree would require more complexity, especially with each rotation that happens when inserting or deleting a node. Using a HashTable is much simpler and has a better average-case performance for updating the inventory table and items within. The AVLTree’s sorted order is not needed, making the HashTable data structure a more efficient choice.
 
-| Aspects | HashTable | AVLTree (alt) |
-|------------------|--------------------|------------------------|
-| **Advantages** | - Average O(1) insertion, deletion, lookup<br>- Simple key-count mapping<br>- Ideal for fast gameplay queries<br>- Automatically sorted keys<br>- Great for ordered traversals |
-| **Disadvantages** | - O(n), worst-case, with poor hashing<br>- No sorted orderings<br>- Needs resizing/hashing<br>- More complex implementation<br>- A bit slower due to balancing |
-| **Insert Complexity** | Average O(1), worst O(n) | O(log n) |
-| **Remove Complexity** | Average O(1), worst O(n) | O(log n) |
-| **Lookup Complexity** | Average O(1), worst O(n) | O(log n) |
+| Aspects | HashTable | AVLTree (Alternative) |
+|---------|-----------|------------------------|
+| **Advantages** | - Average O(1) insertion, deletion, lookup<br>- Simple key→count mapping<br>- Ideal for fast gameplay queries | - Automatically sorted keys<br>- Great for ordered traversals<br>- Guaranteed O(log n) operations |
+| **Disadvantages** | - Worst-case O(n) if collisions occur<br>- No sorted ordering<br>- Requires resizing / rehashing | - More complex implementation<br>- Insert/delete require balancing rotations<br>- Higher constant-time overhead |
+| **Insert Complexity** | Avg O(1), worst O(n) | O(log n) |
+| **Remove Complexity** | Avg O(1), worst O(n) | O(log n) |
+| **Lookup Complexity** | Avg O(1), worst O(n) | O(log n) |
 
 
