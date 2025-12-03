@@ -70,6 +70,7 @@ CS-3100-01
     - Edge Cases:
         - Both inventories are empty
         - Maxed count of items- could result in overflow
+          
 **intersection_with():** Find items shared between two inventories 
 - Accomplished Gameplay: This operation finds items that are found in both inventories. This could be used to determine items needed for crafting requirements and comparing two different enemies and if what they drop is the same
 - Data Structure Manipulation: The code iterates through one hash table checking if each item’s key exists/matches with the other table. If an item appears in both, the operation will keep the largest count.
@@ -83,11 +84,11 @@ CS-3100-01
 Feature: craftRecipe() — consumes ingredients to create a new item
 - New Data & Data Needed
     - A Method to Check Ingredients
-          - Make sure that all needed items exist in player inventory
-          - Player item quantity must be >= to items needed for crafting recipe system
-          - Stores the name of crafted item
-          - List of needed items for crafting
-          - Could be represented as another MultiSet
+        - Make sure that all needed items exist in player inventory
+        - Player item quantity must be >= to items needed for crafting recipe system
+        - Stores the name of crafted item
+        - List of needed items for crafting
+        - Could be represented as another MultiSet
     - Item used Method
         - Decrease the item count when used for crafting
         - Delete items when their count reaches 0
