@@ -185,3 +185,9 @@ With more time or iteration, I would improve by adding features like a more flex
   The MultiSet is composed of buckets and item-count pairs, which is essentially what the whole inventory system is made up of. The MultiSet can then branch out/extend to different gameplay features like crafting, using, etc. This makes it extendable.
 
 These cases make sure that my design is maintainable and adaptable, while keeping the performance efficient.
+
+## References
+
+Saxena, Anand, Pradhan, A., Harsh, Tribikram. (n.d.). (PDF) a hybrid chaining model with AVL and binary search tree to enhance search speed in hashing. Retrieved from https://www.researchgate.net/publication/283760058_A_Hybrid_Chaining_Model_with_AVL_and_Binary_Search_Tree_to_Enhance_Search_Speed_in_Hashing 
+
+CS 312 lecture 20 hash tables and amortized analysis. (n.d.). Retrieved from https://www.cs.cornell.edu/courses/cs312/2008sp/lectures/lec20.html 
