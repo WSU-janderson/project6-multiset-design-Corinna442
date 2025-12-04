@@ -121,12 +121,30 @@ class Recipe {
     + getCraftedItem() string
 }
 ```
+
+## Psuedocode
+
+```
+function craftRecipe(recipe):
+for each (item, requiredIngrQty) in recipe.ingredients:
+// Ingredients less than the ingredience quantity needed
+if inventory.getCount(item) < requiredIngrQty: return false
+
+// if here, all ingredients are ready, so remove each item in required ingredients list
+for each (item, requiredIngQty) in recipe.ingredients:
+inventory.removeItem(item, requiredIngQty)
+
+// Then insert new crafted item into inventory
+inventory.insertItem(recipe.craftedItem, 1)
+return true
+```
+
 ## Trade-off Analysis
 
 ### Alternative: AVLTree
 I chose the HashTable data structure for my MultiSet because it uses fast average time complexity operations like insertion, deletion, look-up, and count. Constant time average performance is more important to an inventory-based game than the exact ordering of items within the inventory. Thus, I decided not to use the AVLTree because its advantages of keeping items sorted and in order are not supported in my gameplay. Balancing nodes in an AVLTree would require more complexity, especially with each rotation that happens when inserting or deleting a node. Using a HashTable is much simpler and has a better average-case performance for updating the inventory table and items within. The AVLTree’s sorted order is not needed, making the HashTable data structure a more efficient choice.
 
-## Table Summary
+### Table Summary
 | Aspects | HashTable | AVLTree (Alternative) |
 |---------|-----------|------------------------|
 | **Advantages** | - Average O(1) insertion, deletion, lookup<br>- Simple key→count mapping<br>- Ideal for fast gameplay queries | - Automatically sorted keys<br>- Great for ordered traversals<br>- Guaranteed O(log n) operations |
@@ -135,4 +153,33 @@ I chose the HashTable data structure for my MultiSet because it uses fast averag
 | **Remove Complexity** | Avg O(1), worst O(n) | O(log n) |
 | **Lookup Complexity** | Avg O(1), worst O(n) | O(log n) |
 
+Source: https://www.cs.cornell.edu/courses/cs312/2008sp/lectures/lec20.html
 
+## Alternative Design
+I had had chosen the MultiSet using an AVLTree, my design would most likely prioritize sorting items instead of utilizing faster average-time access. The AVLTree would involve having to balaqnce a tree when enacting operations such as insert, remove, and lookup, making the system slower than the HashTable data structure. For an AVLTree, inventory peeks and crafting displays would already be ordered, but gameplay operations would be less quick and effiecient. The AVLTree would most certainly be more order-based, but not as speedy as the HashTable. 
+
+In research, some hybrid designs can combine hashing with AVL trees by placing an AVLTree inside each hash bucket. This can reduce hash table collision slowdowns from O(n) to O(log n). However, this is unnecessary for normal gameplay inventory tables, so we wont't need it.
+(Source: https://www.researchgate.net/publication/283760058_A_Hybrid_Chaining_Model_with_AVL_and_Binary_Search_Tree_to_Enhance_Search_Speed_in_Hashing)
+
+## Evaluation Plan
+
+When testing my design, I would use unit tests to verify the insert, remove, lookup, and edge-case tests work. So if I inserted a new item, the count would be one. If I look up items, it should display the correct count. I would also make sure edge cases work such as checking if the inventory is empty. I would then test the performance, to make sure the system maintains about O(1) behavior in normal gameplay
+
+To make sure I can still modify or add to this design in the future, I will make sure it checks:
+- Easy class coexistence, meaning handling hash, resizing, and counting with other classes will not break the existing code.
+- Making the inventory super simple, meaning I will make sure this design in flexible in the ways other developers may want to extend on it. So the operations will remain unchanged even when new features are added.
+
+## Conclusion / Reflection
+
+My design is built on efficiency and strength because it focuses on performance and faster gameplay. I chose this so that the operations needed in order to access inventory items are quickly enacted. The operations will run in constant average time. Certain trade-offs will occur in exchange for higher performance. One trade-off is ordering of any sort. Thus, the system would not maintain alphabetical or numerical ordering. If I had chosen to work with an AVLTree, automatic ordering would be gauranteed, but at the cost of O(log n), worst case time complexity for every operation. Thus, slower speeds and average performance with more complex rotating/balancing logic. 
+
+With more time or iteration, I would improve by adding features like a more flexible iterator system and maybe the ability to use different hash functions depending on the item types. I would also be interested in trying out a hybrid design, like AVL trees inside of hash buckets, to get rid of worst-case performances. Throughout this project, object oriented principals helped shape my design:
+
+- Abstraction:
+  Certain parts of the game code do not need to be shown and seen from the developers. Hence, the MultiSet will hide the whole interface using hashing and resizing through operations insert, remove, and count. The game system itself doen't need to know these parts, as these parts deal with pure abstraction.
+- Encapsulation:
+  Privately stored data, such as bucket arrays and item counts, are preventing outside code from changing the internal structure directly. These should never be changes, that is why they are private.
+- Composition:
+  The MultiSet is composed of buckets and item-count pairs, which is essentially what the whole inventory system is made up of. The MultiSet can then branch out/extend to different gameplay features like crafting, using, etc. This makes it extendable.
+
+These cases make sure that my design is maintainable and adaptable, while keeping the performance efficient.
