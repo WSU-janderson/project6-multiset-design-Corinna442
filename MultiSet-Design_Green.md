@@ -1,7 +1,9 @@
 # MultiSet Design
 
-**Corinna Green**
+**Corinna Green** 
+
 CS-3100-01
+
 12/5/2025
 
 ## Introduction
